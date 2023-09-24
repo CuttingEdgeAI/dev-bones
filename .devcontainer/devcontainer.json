@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "dev-bones",
+
+	"dockerComposeFile": "docker-compose.yml",
+
+	"workspaceFolder": "/workspaces/dev-bones",
+
+	"service": "dev-bones",
+
+	// Uncomment the next line to use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "./post-devbuild.sh",
+
+	// Configure tool-specific properties.
+	// Add the IDs of extensions you want installed when the container is created.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"mhutchie.git-graph",
+				"eamodio.gitlens",
+				"ms-azuretools.vscode-docker",
+				"github.vscode-github-actions",
+				"johnpapa.vscode-peacock",
+				"timonwong.shellcheck",
+				"robertz.code-snapshot"
+			],
+			"settings": {
+				"editor.tabSize": 4,
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.profiles.linux": {
+				  "bash": {
+					"path": "bash",
+					"icon": "terminal-bash"
+				  },
+				  "zsh": {
+					"path": "zsh"
+				  },
+				  "tmux": {
+					"path": "tmux",
+					"icon": "terminal-tmux"
+				  }
+				}
+			}
+		}
+	},
+	
+	// Adds specific features to your dev container post build.
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/mikaello/devcontainer-features/modern-shell-utils:1": {},
+		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.11"
+		}
+	},
+
+	"remoteUser": "vscode",
+	
+	"shutdownAction": "stopCompose"
+
+}

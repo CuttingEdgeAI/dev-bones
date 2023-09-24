@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  dev-bones:
+    init: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces/dev-bones:cached
+      - /var/run/docker.sock:/var/run/docker-host.sock
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.ssh:/home/vscode/.ssh:cached
+      - /dev/dri:/dev/dri
+      - dev-bones-bashhistory:/commandhistory
+      - huggingface-cache:/home/vscode/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  dev-bones-bashhistory:
+  huggingface-cache:
